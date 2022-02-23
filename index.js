@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const User = require('./models/User')
 
 const typeDefs  = require('./graphql/typeDefs')
-const resolvers = require('./graphql/resolvers/post')
+const resolvers = require('./graphql/resolvers')
 
 
 const server = new ApolloServer ({
