@@ -18,9 +18,9 @@ const PostSchema = new mongoose.Schema({
     ],
     new_user: {
         type: mongoose.Schema.Types.ObjectId,
-        refs: 'new_users'
+        refs: 'users'
     }
 },
 {timestamps: true})
 
-module.exports = mongoose.model('new_post', PostSchema)
+module.exports = mongoose.model('post', PostSchema)

@@ -14,17 +14,17 @@ module.exports = { Mutation : {
                 throw new UserInputError('Errors', errors)
             }
 
-            const user = new User.findOne({username})
+            const user = await User.findOne({username})
             if (!user) {
-                user.general = `User not found`
+                errors.general = `User not found`
                 throw new UserInputError('Errors', errors)
             }
+            console.log(user)
 
-            const match = bcrypt.compare(password, user.password)
-
-            if (!match){
-                user.general = `Wrong credentials`
-                throw new UserInputError('Wrong Credentials', errors)
+            const match = await bcrypt.compare(password, user.password);
+            if (!match) {
+                errors.general = 'Wrong crendetials';
+                throw new UserInputError('Wrong crendetials', { errors });
             }
 
             const token = jwt.sign({
@@ -34,8 +34,8 @@ module.exports = { Mutation : {
             }, process.env.SECRET_KEY, {expiresIn: '3d'})
 
             return {
-                ...res._doc, 
-                id: res._id,
+                ...user._doc, 
+                id: user._id,
                 token
             }
         },
@@ -60,7 +60,7 @@ module.exports = { Mutation : {
             const hashedPassword = await bcrypt.hash(password, 12)
 
             const user = new User({
-                email, username, hashedPassword
+                username, password : hashedPassword, email
             })
 
             const res = await user.save()

@@ -22,8 +22,8 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        register( registerInput: registerInput): User!
-        login(username: String, password: String): user!
+        register( registerInput: registerInput): User!,
+        login(username: String, password: String): User!
     }
     type Query{
         getPosts: [Post]
