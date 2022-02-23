@@ -11,7 +11,8 @@ const typeDefs = gql`
         id: ID!,
         email: String!,
         username: String!,
-        token: String!
+        token: String!,
+        createdAt: String!
     }
     input registerInput {
         username: String!,
