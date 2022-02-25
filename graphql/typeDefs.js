@@ -25,12 +25,12 @@ const typeDefs = gql`
         register( registerInput: registerInput): User!,
         login(username: String, password: String): User!
         createPost(body: String!) : Post!
+        deletePost(postId: ID!): String!
 
     }
     type Query{
         getPosts: [Post]
         getPost(postID: ID!) : Post!
-        deletePost(postID: ID!): String!
     }
 `
 
