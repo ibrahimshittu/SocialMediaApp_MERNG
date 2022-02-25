@@ -16,7 +16,7 @@ const PostSchema = new mongoose.Schema({
         },
         {timestamps: true}
     ],
-    new_user: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         refs: 'users'
     }

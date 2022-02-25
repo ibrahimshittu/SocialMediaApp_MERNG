@@ -31,7 +31,7 @@ module.exports = { Mutation : {
                 id: user.id, 
                 username: user.username, 
                 email: user.email
-            }, process.env.SECRET_KEY, {expiresIn: '3d'})
+            }, process.env.SECRET_KEY, {expiresIn: '24h'})
 
             return {
                 ...user._doc, 
