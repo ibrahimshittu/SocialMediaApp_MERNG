@@ -27,6 +27,9 @@ const typeDefs = gql`
     }
     type Query{
         getPosts: [Post]
+        getPost(postID: ID!) : Post!
+        createPost(body: String!) : Post!
+        deletePost(postID: ID!): String!
     }
 `
 
