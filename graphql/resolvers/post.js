@@ -30,7 +30,7 @@ module.exports = { Query : {
         const new_post = Post({body, user : user.id, username: user.username})
         const res = await new_post.save()
 
-        return res.json()
+        return res
     }, 
     async deletePost(_, {postId}, context, info){
         const user = checkAuth(context)
