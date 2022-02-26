@@ -29,7 +29,7 @@ module.exports = { Query : {
         const user = checkAuth(context)
         const new_post = Post({body, user : user.id, username: user.username})
         const res = await new_post.save()
-
+        pubsub.publish('NEW_POST', { newPost: res });
         return res
     }, 
     async deletePost(_, {postId}, context, info){
@@ -49,6 +49,10 @@ module.exports = { Query : {
         } catch (error) {
             throw new Error(error)
         }
+    }
+}, Subscription: {
+    newPost: {
+        subscribe: (_,__, {pubsub}) => pubsub.asyncIterator('NEW_POST')
     }
 }
 }

@@ -18,6 +18,8 @@ const typeDefs = gql`
         username: String!,
         comments: [Comment]!,
         likes: [Like]!
+        likeCount: Int!
+        commentCount: Int!
     }
 
     type User {
@@ -46,6 +48,9 @@ const typeDefs = gql`
     type Query{
         getPosts: [Post]
         getPost(postId: ID!) : Post!
+    }
+    type Subscription {
+        newPost: Post!
     }
 `
 
