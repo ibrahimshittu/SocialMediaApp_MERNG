@@ -45,7 +45,7 @@ const typeDefs = gql`
     }
     type Query{
         getPosts: [Post]
-        getPost(postID: ID!) : Post!
+        getPost(postId: ID!) : Post!
     }
 `
 
