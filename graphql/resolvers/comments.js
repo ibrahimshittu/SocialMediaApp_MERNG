@@ -26,6 +26,23 @@ module.exports = {
         } else {
             throw new UserInputError("This post does not exist")
         }
-    }
+    }, 
+    async deleteComment(_, {postId, commentId}, context) {
+        const {username} = checkAuth(context)
+        const post = await Post.findById(postId)
+        if(post){
+            const commentIndex = post.comments.findIndex(comment => comment.id === commentId)
+            if(commentIndex === -1){
+                throw new UserInputError("This comment does not exist")
+            }
+            if(post.comments[commentIndex].username !== username){
+                throw new AuthenticationError("Action not allowed")
+            }
+            post.comments.splice(commentIndex, 1)
+            await post.save()
+            return post
+        }
+
+    },
     }
 }
