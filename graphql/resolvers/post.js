@@ -27,6 +27,9 @@ module.exports = { Query : {
 }, Mutation: {
     async createPost(_, {body}, context, info) {
         const user = checkAuth(context)
+        if(args.body.trim() === ""){
+            throw new UserInputError("Body cannot be empty")
+        }
         const new_post = Post({body, user : user.id, username: user.username})
         const res = await new_post.save()
         pubsub.publish('NEW_POST', { newPost: res });
