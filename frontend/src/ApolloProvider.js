@@ -7,7 +7,7 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   // Provide required constructor fields
   cache: cache,
-  uri: 'http://localhost:4000/',
+  uri: 'http://localhost:5000/',
 
   // Provide some optional constructor fields
   name: 'react-web-client',
