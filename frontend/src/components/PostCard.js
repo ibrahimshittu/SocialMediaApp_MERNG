@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Card, Button, Image} from 'semantic-ui-react'
 
 
-const PostCard = ({post: {body, username, likeCount, comments, likes, commentCount} }) => {
+const PostCard = ({post: {body,id, username, likeCount, comments, likes, commentCount} }) => {
   return (
-    <Card>
-        <Card.Content>
+    <Card fluid>
+        <Card.Content as={Link} to={`/posts/${id}`}> 
             <Image
             floated='right'
             size='mini'
