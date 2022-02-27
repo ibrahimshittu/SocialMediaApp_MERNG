@@ -5,6 +5,8 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import MenuBar from './components/menu'
+import './App.css'
+
 
 function App() {
   return (

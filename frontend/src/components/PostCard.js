@@ -1,9 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Button, Image} from 'semantic-ui-react'
+import { Card, Button,Label, Icon, Image} from 'semantic-ui-react'
 
 
 const PostCard = ({post: {body,id, username, likeCount, comments, likes, commentCount} }) => {
+
+    const likePost = () => {}
+    const commentOnPost = () => {}
+
   return (
     <Card fluid>
         <Card.Content as={Link} to={`/posts/${id}`}> 
@@ -19,14 +23,24 @@ const PostCard = ({post: {body,id, username, likeCount, comments, likes, comment
             </Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <div className='ui two buttons'>
-            <Button basic color='green'>
-                Approve
+            <Button as='div' labelPosition='right' onClick={likePost}>
+                <Button color='teal' basic>
+                    <Icon name='heart' />
+                    
+                </Button>
+                <Label basic color='teal' pointing='left'>
+                    {likeCount}
+                </Label>
             </Button>
-            <Button basic color='red'>
-                Decline
+            <Button as='div' labelPosition='right'>
+                <Button color='blue' basic>
+                    <Icon name='comments' />
+                    
+                </Button>
+                <Label basic color='blue' pointing='left' onClick={commentOnPost}>
+                    {commentCount}
+                </Label>
             </Button>
-            </div>
         </Card.Content>
     </Card>
   )
