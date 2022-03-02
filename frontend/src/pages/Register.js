@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { gql, useMutation} from '@apollo/client'
 import { Form, Button } from 'semantic-ui-react'
 
-const Register = () => {
+const Register = (props) => {
+
+    const navigate = useNavigate()
 
     const [errors, setErrors] = useState({})
 
@@ -13,27 +16,27 @@ const Register = () => {
       confirmPassword: ''
     })
 
+    const onChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value })
+    }
+
+    const [registerUser, { loading }] = useMutation(REGISTER_USER, {
+      update(_, result) {
+        console.log(result)
+        navigate("/")
+      }, 
+      onError(err) {
+        setErrors(err.graphQLErrors[0].extensions)
+        console.log("graphql error", err.graphQLErrors[0])
+      },
+      variables : values
+    });
+
     const handleSubmit = (e) => {
       e.preventDefault()
       registerUser()
         
     }
-
-    const onChange = (e) => {
-        setValues({ ...values, [e.target.name]: e.target.value })
-    }
-
-    const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER, {
-      update(proxy, result) {
-        console.log(result)
-      }, 
-      onError({graphQLErrors, networkError}) {
-        if (graphQLErrors) {
-          setErrors(graphQLErrors[0].extensions)
-        }
-      },
-      variables : values
-    });
 
   return (
     <div className='form-container' >
@@ -78,14 +81,15 @@ const Register = () => {
         </Button>
       
     </Form>
+      {console.log("all  x errors", errors)}
 
-      {/* {Object.entries(errors).length > 0 && <div className="ui error message">
+      {Object.entries(errors).length > 0 && <div className="ui error message">
         <ul className="list">
           {Object.entries(errors).map(([key, value]) => (
             <li key={key}>{value.toString()}</li>
           ))}
         </ul>
-      </div>} */}
+      </div>}
 
     </div>
 
@@ -107,4 +111,4 @@ const REGISTER_USER = gql`
   }
 `
 
-export default Register
+export default Register;
