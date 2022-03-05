@@ -8,7 +8,6 @@ const Register = (props) => {
     const navigate = useNavigate()
 
     const [errors, setErrors] = useState({})
-    const [loginError, setLoginError] = useState({})
 
 
     const [values, setValues] = useState({
@@ -29,7 +28,6 @@ const Register = (props) => {
       }, 
       onError(err) {
         setErrors(err.graphQLErrors[0].extensions)
-        setLoginError(err.graphQLErrors[0])
         console.log("graphql error", err.graphQLErrors[0])
       },
       variables : values

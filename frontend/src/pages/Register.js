@@ -3,22 +3,22 @@ import { useNavigate } from 'react-router-dom'
 import { gql, useMutation} from '@apollo/client'
 import { Form, Button } from 'semantic-ui-react'
 
-const Register = (props) => {
+import { useForm } from '../Utils/hooks'
+
+const Register = () => {
 
     const navigate = useNavigate()
 
     const [errors, setErrors] = useState({})
 
-    const [values, setValues] = useState({
+    const initialState = {
       username: '',
       email: '',
       password: '',
       confirmPassword: ''
-    })
-
-    const onChange = (e) => {
-        setValues({ ...values, [e.target.name]: e.target.value })
     }
+
+    const { onChange, handleSubmit, values } = useForm(initialState, addUser)
 
     const [registerUser, { loading }] = useMutation(REGISTER_USER, {
       update(_, result) {
@@ -32,11 +32,11 @@ const Register = (props) => {
       variables : values
     });
 
-    const handleSubmit = (e) => {
-      e.preventDefault()
+    function addUser() {
       registerUser()
-        
     }
+
+    
 
   return (
     <div className='form-container' >
@@ -83,13 +83,13 @@ const Register = (props) => {
     </Form>
       {console.log("all  x errors", errors)}
 
-      {Object.entries(errors).length > 0 && <div className="ui error message">
+      {/* {Object.entries(errors).length > 0 && <div className="ui error message">
         <ul className="list">
           {Object.entries(errors).map(([key, value]) => (
             <li key={key}>{value.toString()}</li>
           ))}
         </ul>
-      </div>}
+      </div>} */}
 
     </div>
 
