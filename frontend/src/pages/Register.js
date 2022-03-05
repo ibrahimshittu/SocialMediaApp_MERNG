@@ -40,6 +40,7 @@ const Register = () => {
 
   return (
     <div className='form-container' >
+      <h2>Register</h2>
     <Form className={ loading ? 'loading' : ' '} onSubmit={handleSubmit} noValidate>
       
         <Form.Input
