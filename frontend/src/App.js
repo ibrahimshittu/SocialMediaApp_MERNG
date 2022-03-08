@@ -7,9 +7,12 @@ import Login from './pages/Login'
 import MenuBar from './components/menu'
 import './App.css'
 
+import {AuthProvider} from './context/auth'
+
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <Container>
         <MenuBar/>
@@ -20,6 +23,7 @@ function App() {
         </Routes>
       </Container>
     </Router>
+    </AuthProvider>
   );
 }
 
