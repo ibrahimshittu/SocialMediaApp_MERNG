@@ -19,8 +19,7 @@ module.exports = { Mutation : {
                 errors.general = `User not found`
                 throw new UserInputError('Errors', errors)
             }
-            console.log(user)
-
+            
             const match = await bcrypt.compare(password, user.password);
             if (!match) {
                 errors.general = 'Wrong crendetials';
