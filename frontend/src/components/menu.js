@@ -30,7 +30,7 @@ function MenuBar() {
           <Menu.Menu position='right'>
             <Menu.Item
               name='logout'
-              onClick={handleItemClick}
+              onClick={logout}
               as ={Link}
               to='/logout'
             />
