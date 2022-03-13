@@ -31,8 +31,7 @@ function MenuBar() {
             <Menu.Item
               name='logout'
               onClick={logout}
-              as ={Link}
-              to='/logout'
+              
             />
           </Menu.Menu>
         </Menu>
